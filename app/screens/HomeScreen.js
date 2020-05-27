@@ -1,28 +1,44 @@
 import React from 'react';
 
-import {Text, Image, SafeAreaView, StyleSheet,} from 'react-native';
-import colors from '../config/colors.js';
+import {
+    Text, 
+    Image, 
+    SafeAreaView, 
+    View,
+    StyleSheet,
+} from 'react-native';
 
-function HomeScreen(props){
-    //TODO: This is a setup test
-    return(
-        //TODO detect os here this does not work on android
-        <SafeAreaView>
-            <Text style={styles.screenTitle} >Home</Text>            
-        </SafeAreaView>
+import colors from '../config/colors.js';
+import EmissionCircle from '../components/EmissionCircle.js';
+
+const HomeScreen = () => {
+    return( 
+        <SafeAreaView style={styles.mainView} > 
+            <Text style={styles.screenTitle}>Today's total Emissions</Text> 
+
+            <View style={styles.circle}> 
+                <EmissionCircle emissionNumber="212"/>
+            </View>
+
+        </SafeAreaView> 
     );
-}
+};
 
 const styles = StyleSheet.create({
     screenTitle: {
-        top: 20,
+        left: 10,
+        top: 30,
         color: colors.textPrimary, 
-        fontSize: 40,
+        fontSize: 25,
         fontWeight: 'bold',
-        textAlign: 'center',
     }, 
+    mainView: {
+        flex: 1,
+        alignItems: 'center',
+    },
+    circle: {
+        top: '20%',
+    },
 }); 
 
-
-export default HomeScreen;
-
+export default HomeScreen; 
