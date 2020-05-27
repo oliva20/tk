@@ -8,6 +8,8 @@ import Ionicons from '@expo/vector-icons/Ionicons';
 
 import HomeScreen from './app/screens/HomeScreen.js';
 import SettingsScreen from './app/screens/SettingsScreen.js';
+import TransportScreen from './app/screens/TransportScreen.js';
+import FoodScreen from './app/screens/FoodScreen.js';
 import colors from './app/config/colors.js'; 
 
 const Tab = createBottomTabNavigator();
@@ -25,7 +27,14 @@ function App() {
 
                     } else if (route.name === 'Settings') {
                         iconName = focused ? 'ios-list-box' : 'ios-list';
+
+                    }  else if (route.name === 'Transport') {
+                        iconName = focused ? 'ios-car' : 'ios-car';
+
+                    }  else if (route.name === 'Food') {
+                        iconName = focused ? 'ios-pizza' : 'ios-pizza';
                     }
+
                     // You can return any component that you like here!
                     return <Ionicons name={iconName} size={size} color={color} />;
                 },
@@ -38,7 +47,10 @@ function App() {
             >
 
               <Tab.Screen name="Home" component={HomeScreen} />
+              <Tab.Screen name="Transport" component={TransportScreen} />
+              <Tab.Screen name="Food" component={FoodScreen} />
               <Tab.Screen name="Settings" component={SettingsScreen} />
+
           </Tab.Navigator>
       </NavigationContainer>
   );
