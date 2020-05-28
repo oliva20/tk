@@ -8,9 +8,12 @@ import {
 } from 'react-native';
 
 import colors from '../config/colors.js';
+import sizes from '../config/sizes.js';
 
 const EmissionCircle = ( props ) => {
     return(
+        // 0 - 10 = SMALL; 11 - 20 = MEDIUM; 21 - 30 = HIGH
+            //TODO Its should check for severity of the emission total of the day and get reflected in the colour of the circle.
             <View style={styles.circleBackground}> 
                 <Text style={styles.emissionNumber}>{props.emissionNumber} KgCO2</Text>
             </View>
@@ -25,14 +28,14 @@ const styles = StyleSheet.create({
         width: 250,
         height: 250, 
         borderRadius: 125, //half
-        borderWidth: 5,
+        borderWidth: sizes.circleBorderWidth,
         borderColor: colors.primary,
         alignItems: 'center',
         textAlign: 'center',
         justifyContent: 'center',
     },
     emissionNumber: {
-        fontSize: 25,  //TODO create a  size file in config
+        fontSize: sizes.textFontSize, 
         fontWeight: 'bold',
     }
 });

@@ -9,6 +9,7 @@ import {
 } from 'react-native';
 
 import colors from '../config/colors.js';
+import sizes from '../config/sizes.js';
 import EmissionCircle from '../components/EmissionCircle.js';
 
 const HomeScreen = () => {
@@ -29,7 +30,7 @@ const styles = StyleSheet.create({
         left: 10,
         top: 30,
         color: colors.textPrimary, 
-        fontSize: 25,
+        fontSize: sizes.headFontSize,
         fontWeight: 'bold',
     }, 
     mainView: {
