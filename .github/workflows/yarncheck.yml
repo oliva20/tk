@@ -20,4 +20,4 @@ jobs:
 
     steps:
     - uses: CultureHQ/actions-yarn@v1.0.1
-    - run: yarn check
+    - run: yarn test
