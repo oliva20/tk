@@ -1,5 +1,3 @@
-// In App.js in a new project
-
 import * as React from 'react';
 import { View, Text, Button } from 'react-native';
 import { NavigationContainer } from '@react-navigation/native';
@@ -14,46 +12,46 @@ import colors from './app/config/colors.js';
 
 const Tab = createBottomTabNavigator();
 
-function App() {
-  return (
-      <NavigationContainer>
-          <Tab.Navigator         
-            screenOptions={({ route }) => ({
-                tabBarIcon: ({ focused, color, size }) => {
-                    let iconName;
+export default class App extends React.Component {
+    render() {
+        return (
+            <NavigationContainer>
+                <Tab.Navigator         
+                    screenOptions={({ route }) => ({
+                        tabBarIcon: ({ focused, color, size }) => {
+                            let iconName;
 
-                    if (route.name === 'Home') {
-                        iconName = 'ios-home';
+                            if (route.name === 'Home') {
+                                iconName = 'ios-home';
 
-                    } else if (route.name === 'Settings') {
-                        iconName = focused ? 'ios-list-box' : 'ios-list';
+                            } else if (route.name === 'Settings') {
+                                iconName = focused ? 'ios-list-box' : 'ios-list';
 
-                    }  else if (route.name === 'Transport') {
-                        iconName = focused ? 'ios-car' : 'ios-car';
+                            }  else if (route.name === 'Transport') {
+                                iconName = focused ? 'ios-car' : 'ios-car';
 
-                    }  else if (route.name === 'Food') {
-                        iconName = focused ? 'ios-pizza' : 'ios-pizza';
-                    }
+                            }  else if (route.name === 'Food') {
+                                iconName = focused ? 'ios-pizza' : 'ios-pizza';
+                            }
 
-                    // You can return any component that you like here!
-                    return <Ionicons name={iconName} size={size} color={color} />;
-                },
-            })}
+                            // You can return any component that you like here!
+                            return <Ionicons name={iconName} size={size} color={color} />;
+                        },
+                    })}
 
-              tabBarOptions={{
-                  activeTintColor: colors.primary,
-                  inactiveTintColor: 'gray',
-              }}
-            >
+                    tabBarOptions={{
+                        activeTintColor: colors.primary,
+                        inactiveTintColor: 'gray',
+                    }}
+                >
 
-              <Tab.Screen name="Home" component={HomeScreen} />
-              <Tab.Screen name="Transport" component={TransportScreen} />
-              <Tab.Screen name="Food" component={FoodScreen} />
-              <Tab.Screen name="Settings" component={SettingsScreen} />
+                    <Tab.Screen name="Home" component={HomeScreen} />
+                    <Tab.Screen name="Transport" component={TransportScreen} />
+                    <Tab.Screen name="Food" component={FoodScreen} />
+                    <Tab.Screen name="Settings" component={SettingsScreen} />
 
-          </Tab.Navigator>
-      </NavigationContainer>
-  );
+                </Tab.Navigator>
+            </NavigationContainer>
+        );
+    }
 }
-
-export default App;
