@@ -34,7 +34,6 @@ export default class App extends React.Component {
                                 iconName = focused ? 'ios-pizza' : 'ios-pizza';
                             }
 
-                            // You can return any component that you like here!
                             return <Ionicons name={iconName} size={size} color={color} />;
                         },
                     })}

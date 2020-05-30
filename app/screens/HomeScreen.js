@@ -1,5 +1,5 @@
 import React from 'react';
-
+import { useIsFocused } from '@react-navigation/native';
 import {
     Text, 
     Image, 
@@ -11,18 +11,46 @@ import {
 import colors from '../config/colors.js';
 import sizes from '../config/sizes.js';
 import EmissionCircle from '../components/EmissionCircle.js';
+import EmissionManager from '../utils/manager/EmissionManager.js'
 
-const HomeScreen = () => {
-    return( 
-        <SafeAreaView style={styles.mainView} > 
-            <Text style={styles.screenTitle}>Today's total Emissions</Text> 
+export default class HomeScreen extends React.Component {
+    _isMounted = false; 
+    
+    constructor(props) {
+        super(props);
+        this.state = {emission: 0};
+    } 
 
-            <View style={styles.circle}> 
-                <EmissionCircle emissionNumber="212"/>
-            </View>
+    componentDidMount(){
+        this._isMounted = true;
+        EmissionManager.getEmissionTotalToday().then(value => {
+            this.setState({emission:value});
+        });
+    }
 
-        </SafeAreaView> 
-    );
+    componentDidUpdate(){
+        EmissionManager.getEmissionTotalToday().then(value => {
+            this.setState({emission:value});
+        });
+    }
+    
+    //prevents from getting the warning 
+    componentWillUnmount(){
+        this._isMounted = false; 
+    }
+
+    render() {
+        return( 
+            <SafeAreaView style={styles.mainView} > 
+                <Text style={styles.screenTitle}>Today's total Emissions</Text> 
+
+                <View style={styles.circle}> 
+                    <EmissionCircle emissionNumber={this.state.emission}/>
+                </View>
+
+            </SafeAreaView> 
+        );
+    }
 };
 
 const styles = StyleSheet.create({
@@ -42,4 +70,3 @@ const styles = StyleSheet.create({
     },
 }); 
 
-export default HomeScreen; 

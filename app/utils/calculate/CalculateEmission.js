@@ -3,11 +3,11 @@ import {
     food,
 } from 'carbon-footprint'; 
 
-const getCO2FromFood = ( grams, foodType ) => {
+const getCO2FromFood = ( kg , foodType ) => {
     let emissionResult = null;   
     Object.keys(food).forEach((key) => {
         if(foodType == key){
-            emissionResult = grams * food[key];
+            emissionResult = kg * food[key];
         }
     });
     return emissionResult;

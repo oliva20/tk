@@ -34,9 +34,10 @@ const storeEmission = async ( value ) => {
 }
 
 const getEmissionTotalToday = async () => {
-    try {
 
-        let emission = 0;
+    let emission = 0;
+
+    try {
 
         const emissionToday = await AsyncStorage.getItem(dateToday);
 
@@ -44,12 +45,12 @@ const getEmissionTotalToday = async () => {
             emission  = parseInt(emissionToday); 
         }
 
-        return emission;
 
     } catch (e) {
         console.log(`Cannot return emission from today: ${e}`); 
     }
-    
+
+    return emission;
 }
 
 const clearEmissions = async () => {

@@ -32,9 +32,11 @@ export default class FoodScreen extends React.Component {
     
     calcEmission() {
         //convert grams to kg
-        let carbon = CalculateEmission.getCO2FromFood((this.state.value /1000), 
+        let emission = CalculateEmission.getCO2FromFood((this.state.value /1000), 
             this.state.foodItem); 
-         
+
+         EmissionManager.storeEmission(emission);  
+
     }
 
     render() { 
