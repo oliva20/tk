@@ -4,4 +4,5 @@ export default {
     textPrimary: "#000",
     textWhite: "#FFF",
     black: "#000",
+    grey: "#CDCDCD",
 }

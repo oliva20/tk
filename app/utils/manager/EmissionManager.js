@@ -42,7 +42,7 @@ const getEmissionTotalToday = async () => {
         const emissionToday = await AsyncStorage.getItem(dateToday);
 
         if(emissionToday != null) {
-            emission  = parseInt(emissionToday); 
+            emission  = parseFloat(emissionToday); 
         }
 
 
