@@ -10,45 +10,17 @@ import {
 import colors from '../config/colors.js';
 import sizes from '../config/sizes.js';
 
-
 //TODO create strings file for translation
-export default class TrackBtn extends React.Component {
-    state = {
-        pressed: false,
-        text: "Start",
-        backgroundColor: colors.primary,
-    }
-
-    render() {
-
-        const { text, pressed, backgroundColor } = this.state;
-
-        return(
-            <View styles={styles.container}>
-
-                <TouchableOpacity 
-                    style={[styles.touch, 
-                            {backgroundColor: this.state.backgroundColor}]}
-                    onPress={
-                        () => {
-                            if(this.state.pressed) {
-                                this.setState({ pressed : false }); 
-                                this.setState({ backgroundColor : colors.primary });
-                                this.setState({ text : "Start" });
-                                //off
-                            } else {
-                                //on
-                                this.setState({ pressed : true }); 
-                                this.setState({ backgroundColor : colors.attention });
-                                this.setState({ text : "Stop" });
-                            }
-                    }}>
-
-                    <Text style={styles.text}>{text}</Text>
-                </TouchableOpacity>
-            </View>
-        );
-    }
+const TrackButton = props => { 
+    return(
+        <View styles={styles.container}>
+            <TouchableOpacity 
+                style={{...styles.touch, ...props.style}}
+                onPress={props.onPress}>
+                <Text style={styles.text}>{props.text}</Text>
+            </TouchableOpacity>
+        </View>
+    );
 }
 
 const styles = StyleSheet.create({
@@ -56,7 +28,6 @@ const styles = StyleSheet.create({
         width: '10%',
     }, 
     touch: {
-        backgroundColor: colors.primary, 
         color: colors.white, 
         flexDirection: 'row',
         alignItems: 'center',
@@ -70,3 +41,4 @@ const styles = StyleSheet.create({
     },
 });
 
+export default TrackButton;
