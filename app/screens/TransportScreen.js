@@ -40,14 +40,12 @@ export default class TansportScreen extends React.Component {
     }
 
     locationChanged = ( location ) => {
-        //simulating coordiantes being added.
          if(this.state.pressed) {
              let loc = {
                  longitude : location.coords.longitude,
                  latitude : location.coords.latitude,
              }
-            
-             //adding to coords
+
              this.setState({ 
                  coordinates : this.state.coordinates.concat([loc])
              });
@@ -84,7 +82,7 @@ export default class TansportScreen extends React.Component {
                         this.state.markers.map(marker => (
                             <MapView.Marker
                                 coordinate={marker}
-                                title="@@@ Marker"
+                                title="Location Marker"
                             />
                         ))
                     }
