@@ -1,0 +1,8 @@
+[ ] Create a custom marker that will ask the user what type of transport were they on.
+        -> This should have sort of model with (Spinner, "What were you on?").
+
+[ ] Generate tests for the markers.
+
+[ ] Create a manager to calculate the emissions from transports;
+
+[ ] Look into migrating the project to TypeScript;
