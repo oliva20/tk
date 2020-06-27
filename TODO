@@ -6,3 +6,5 @@
 [ ] Create a manager to calculate the emissions from transports;
 
 [ ] Look into migrating the project to TypeScript;
+
+[ ] Fix the warning on every child should have props key;

@@ -1,11 +1,14 @@
 import React from 'react';
 import MapView, {Polyline}  from 'react-native-maps';
 import * as Location from 'expo-location';
+import { transport } from 'carbon-footprint';
 import {
     View,
+    Text,
     StyleSheet,
     Dimensions,
     Button,
+    Picker,
 } from 'react-native';
 
 import colors from '../config/colors.js';
@@ -19,14 +22,14 @@ const GEOLOCATION_OPTIONS = {
 
 const MARKER_INTERVAL = 10; //every x coordinates register a marker NOTE: We might want to increase this value in the future
 var counter = 0; //used to count how many coordinates inserted
-var firstCoordinate = true;
+var isFirstCoordinate = true;
 
 export default class TansportScreen extends React.Component { 
 
     state = {
         pressed: false,
         coordinates: [],
-        markers: [],
+        markers: [], 
         btnText: "Start",
         bgColor: colors.primary,
         errorMsg: null, 
@@ -45,22 +48,31 @@ export default class TansportScreen extends React.Component {
                  longitude : location.coords.longitude,
                  latitude : location.coords.latitude,
              }
+             
+             //type will be the transport type the user is on.
+             //the marker object
+             let mLoc = {
+                 latitude: loc.latitude, 
+                 longitude: loc.longitude,
+                 type: 'foot',
+             }
 
              this.setState({ 
                  coordinates : this.state.coordinates.concat([loc])
              });
             
-             if(firstCoordinate){
+             if(isFirstCoordinate){
                 this.setState({
-                    markers : this.state.markers.concat([loc])
+                    markers : this.state.markers.concat([mLoc])
                 });
-                firstCoordinate = false;
+
+                isFirstCoordinate = false;
              }
         
              //adding to markers
             if(counter == MARKER_INTERVAL) {
                 this.setState({
-                    markers : this.state.markers.concat([loc])
+                    markers : this.state.markers.concat([mLoc])
                 });
                 //reset it
                 counter = 0;
@@ -69,11 +81,12 @@ export default class TansportScreen extends React.Component {
             }
 
         } else {
-            firstCoordinate = true;
+            isFirstCoordinate = true;
         }
      }
 
     render() {
+        console.log(transport);
         return(
             <View style={styles.container}>
                 <MapView style={styles.mapStyle} showsUserLocation={true} >
@@ -81,27 +94,46 @@ export default class TansportScreen extends React.Component {
                     {
                         this.state.markers.map(marker => (
                             <MapView.Marker
-                                coordinate={marker}
+                                coordinate={{ latitude: marker.latitude, longitude: marker.longitude, }}
                                 title="Location Marker"
-                            />
+                            > 
+                                <MapView.Callout>
+                                    <View> 
+                                    </View>
+                                </MapView.Callout>
+
+                            </MapView.Marker>
                         ))
                     }
+                    
+
                 </MapView> 
 
                 <View style={styles.btnView}>
                     <TrackBtn style={{backgroundColor: this.state.bgColor}} 
                         text={this.state.btnText} 
                         onPress={() => {
+
                             if(this.state.pressed) {
-                                console.log(`Got this many coordinates: ${this.state.coordinates.length}`);
+                                
                                 //save the last coordinate to the markers array.
+                                let lastCoordinate = this.state.coordinates[this.state.coordinates.length - 1]; 
+                                let mLastCoordinate = {
+                                        latitude: lastCoordinate.latitude, 
+                                        longitude: lastCoordinate.longitude,
+                                        type: 'foot',
+                                } 
+                                
                                 this.setState({
-                                    markers : this.state.markers.concat(this.state.coordinates[this.state.coordinates.length - 1])
+                                    markers : this.state.markers.concat(mLastCoordinate)
                                 });
                                 this.setState({pressed:false});
                                 this.setState({btnText:"Start"});
                                 this.setState({bgColor:colors.primary});
+
+                                console.log(this.state.markers);
                             } else {
+                                //consider adding this logic to a function -> It's gross. 
                                 //delete the exisiting coordinates before starting again.
                                 this.setState({markers:[]});
                                 this.setState({coordinates: []});
