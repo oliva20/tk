@@ -153,8 +153,6 @@ export default class TansportScreen extends React.Component {
                 </MapView> 
 
                 <View style={styles.btnView}>
-                    <Button title="TestBtn" onPress= { () => {console.log(this.state.markers)} }>
-                    </Button>
                     <TrackBtn style={{backgroundColor: this.state.bgColor}} 
                         text={this.state.btnText} 
                         onPress={() => {
