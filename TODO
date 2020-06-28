@@ -8,3 +8,8 @@
 [ ] Look into migrating the project to TypeScript;
 
 [ ] Fix the warning on every child should have props key;
+
+NOTES** 
+-> There is an issue with the callout of mapview. So the only soluion is to use
+a modal to ask the user for the type of transport. 
+ 
