@@ -27,7 +27,6 @@ const MARKER_INTERVAL = 10; //every x coordinates register a marker NOTE: We mig
 var counter = 0; //used to count how many coordinates inserted
 var idCounter = 0; //counts markers id
 var isFirstCoordinate = true;
-//var transportList = [['test1','test2','test3']];
 var transportList = [Object.keys(transport).map(function(key){
     return key;
 })];
@@ -39,8 +38,6 @@ function updateMarker(m, markers, s, r) {
     });
 }
 
-// What a marker object should look like
-// var marker = { lon: 0.0, lat: 0.0, type: "foot" };
 export default class TansportScreen extends React.Component { 
 
     state = {
@@ -65,7 +62,7 @@ export default class TansportScreen extends React.Component {
 
          if(this.state.pressed) {
 
-             idCounter++; // always increment the id to avoid duplicates. Refactoring this in the futture.
+             idCounter++; 
 
              let loc = {
                  longitude : location.coords.longitude,
