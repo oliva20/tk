@@ -41,14 +41,18 @@ export default class HomeScreen extends React.Component {
 
     render() {
         return( 
-            <SafeAreaView style={styles.mainView} > 
-                <Text style={styles.screenTitle}>Today's total Emissions</Text> 
+            <View style={styles.mainView}> 
+
+                <View style={styles.titleContainer}>
+                    <Text style={styles.screenTitle}>Home</Text>
+                </View>
+
+                <Text style={styles.todaysEmission}>Today's total Emissions</Text> 
 
                 <View style={styles.circle}> 
                     <EmissionCircle emissionNumber={this.state.emission}/>
                 </View>
-
-            </SafeAreaView> 
+            </View > 
         );
     }
 };
@@ -58,9 +62,15 @@ const styles = StyleSheet.create({
         left: 10,
         top: 30,
         color: colors.textPrimary, 
-        fontSize: sizes.headFontSize,
+        fontSize: 30,
         fontWeight: 'bold',
     }, 
+    todaysEmission: {
+        top: 70,
+        color: colors.textPrimary, 
+        fontWeight: 'bold',
+        fontSize: sizes.headFontSize,
+    },
     mainView: {
         flex: 1,
         alignItems: 'center',
