@@ -1,4 +1,5 @@
 import React from 'react';
+import { AntDesign } from '@expo/vector-icons';
 import MapView, {Polyline}  from 'react-native-maps';
 import * as Location from 'expo-location';
 import DropdownMenu from 'react-native-dropdown-menu';
@@ -11,17 +12,22 @@ import {
     Dimensions,
     Button,
     Picker,
-    Modal,
+    TouchableOpacity,
+    Alert,
 } from 'react-native';
 
 import colors from '../config/colors.js';
 import TrackBtn from '../components/TrackBtn.js';
+import CalculateEmission from '../utils/calculate/CalculateEmission.js';
+import EmissionManager from '../utils/manager/EmissionManager.js';
 
 const GEOLOCATION_OPTIONS = { 
     accruracy: Location.Highest,
     distanceInterval: 1,
     timeInterval: 3000, 
 }; 
+
+const SAVE_ICON = { url: '../assets/save.png' };
 
 const MARKER_INTERVAL = 10; //every x coordinates register a marker NOTE: We might want to increase this value in the future
 var counter = 0; //used to count how many coordinates inserted
@@ -48,6 +54,7 @@ export default class TansportScreen extends React.Component {
         bgColor: colors.primary,
         errorMsg: null, 
         modalVisible: false,
+        displayMarkers: false,
     }
    
     
@@ -57,6 +64,22 @@ export default class TansportScreen extends React.Component {
             this.locationChanged
         ); 
     }
+    
+    calculate = () => {
+        if(this.state.markers.length == 0)
+            Alert.alert('Oops! No Route Detected', 'Please start tracking your coordinates and change the mode of transport by pressing each marker.',
+                [
+                    {
+                        text: "Got it",
+                    },
+                ]);
+
+        let total = CalculateEmission.getCO2FromMarkers(this.state.markers);
+        console.log(`Emission Total from Transport: ${total}`);
+        EmissionManager.storeEmission(total);
+        this.setState({ markers : [] });
+        this.setState({ coordinates: [] });
+    } 
 
     locationChanged = ( location ) => {
 
@@ -149,6 +172,16 @@ export default class TansportScreen extends React.Component {
                     
                 </MapView> 
 
+                    <TouchableOpacity
+                        style={styles.saveView}
+                        onPress={this.calculate}
+                    >
+                        <View
+                        >
+                            <AntDesign name="save" size={32} color={colors.primary} />
+                        </View>
+                    </TouchableOpacity>
+
                 <View style={styles.btnView}>
                     <TrackBtn style={{backgroundColor: this.state.bgColor}} 
                         text={this.state.btnText} 
@@ -208,5 +241,14 @@ const styles = StyleSheet.create({
     infoWindow: {
         width: Dimensions.get('window').width / 2,
         height: Dimensions.get('window').height / 3,
+    },
+    saveView: {
+        position: 'absolute',
+        top: '10%',
+        right: '5%',
+        alignSelf: 'flex-end',
+    },
+    saveIcon: {
+        padding: 10
     }
 }); 
