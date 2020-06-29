@@ -1,9 +1,9 @@
 [x] Create a custom marker that will ask the user what type of transport were they on.
         -> This should have sort of model with (Spinner, "What were you on?").
 
-[ ] Generate tests for the markers.
+[x] Generate tests for the markers.
 
-[ ] Create a manager to calculate the emissions from transports;
+[x] Create a manager to calculate the emissions from transports;
 
 [ ] Look into migrating the project to TypeScript;
 
@@ -11,6 +11,8 @@
 
 [ ] Refactor the infoWindow for better aesthetics. It also does not include all the 
     possible transports.
+
+[ ] The main screen is not rounding the co2 result.
 
 NOTES** 
 -> There is an issue with the callout of mapview. So the only soluion is to use

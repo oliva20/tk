@@ -38,13 +38,10 @@ const getEmissionTotalToday = async () => {
     let emission = 0;
 
     try {
-
         const emissionToday = await AsyncStorage.getItem(dateToday);
-
         if(emissionToday != null) {
-            emission  = parseFloat(emissionToday); 
+            emission = Number((parseFloat(emissionToday)).toFixed(1)); 
         }
-
 
     } catch (e) {
         console.log(`Cannot return emission from today: ${e}`); 
