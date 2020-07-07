@@ -12,7 +12,11 @@
 [ ] Refactor the infoWindow for better aesthetics. It also does not include all the 
     possible transports.
 
-[ ] The main screen is not rounding the co2 result.
+[x] The main screen is not rounding the co2 result.
+
+[ ] Create an introduction splash screen.
+
+[ ] Add a permission check for the location.
 
 NOTES** 
 -> There is an issue with the callout of mapview. So the only soluion is to use

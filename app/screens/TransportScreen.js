@@ -4,6 +4,7 @@ import MapView, {Polyline}  from 'react-native-maps';
 import * as Location from 'expo-location';
 import DropdownMenu from 'react-native-dropdown-menu';
 import { transport } from 'carbon-footprint'; //returns Object
+import Toast, {DURATION} from 'react-native-easy-toast';
 import {
     View,
     ScrollView,
@@ -45,8 +46,9 @@ function updateMarker(m, markers, s, r) {
 }
 
 export default class TansportScreen extends React.Component { 
-
+    
     state = {
+        permissionStatus: null,
         pressed: false,
         coordinates: [],
         markers: [], 
@@ -64,7 +66,8 @@ export default class TansportScreen extends React.Component {
             this.locationChanged
         ); 
     }
-    
+
+    //this is how to do an async arrow function xxx = async () => {} 
     calculate = () => {
         if(this.state.markers.length == 0)
             Alert.alert('Oops! No Route Detected', 'Please start tracking your coordinates and change the mode of transport by pressing each marker.',
@@ -186,20 +189,26 @@ export default class TansportScreen extends React.Component {
                     <TrackBtn style={{backgroundColor: this.state.bgColor}} 
                         text={this.state.btnText} 
                         onPress={() => {
-
                             if(this.state.pressed) {
+                                //TODO Somewhere in here we must warn the user that the coordinates were acquired.
                                 //save the last coordinate to the markers array.
-                                let lastCoordinate = this.state.coordinates[this.state.coordinates.length - 1]; 
-                                let mLastCoordinate = {
+                                if(this.state.coordinates.length != 0) { //if the coordinates are not empty, otherwise warn the user
+                                    let lastCoordinate = this.state.coordinates[this.state.coordinates.length - 1]; 
+                                    let mLastCoordinate = {
                                         latitude: lastCoordinate.latitude, 
                                         longitude: lastCoordinate.longitude,
                                         type: 'foot',
                                         id: idCounter,
-                                } 
+                                    } 
+
+                                    this.setState({
+                                        markers : this.state.markers.concat(mLastCoordinate)
+                                    });
+                                } else {
+                                    //TODO translate here. Add to strings file.
+                                    this.refs.toast.show('No coordinates were tracked, check your internet connection');
+                                }
                                 
-                                this.setState({
-                                    markers : this.state.markers.concat(mLastCoordinate)
-                                });
                                 this.setState({pressed:false});
                                 this.setState({btnText:"Start"});
                                 this.setState({bgColor:colors.primary});
@@ -216,6 +225,7 @@ export default class TansportScreen extends React.Component {
                             }
                         }}></TrackBtn>
                 </View>
+            <Toast ref="toast" defaultCloseDelay={5000} />
             </View>
         );
 
