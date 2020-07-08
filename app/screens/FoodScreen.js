@@ -133,7 +133,7 @@ const styles = StyleSheet.create({
         padding: 10,
         textAlign: 'left',
         fontWeight: 'bold',
-        fontSize: sizes.textFontSize
+        fontSize: sizes.textFontSize,
     },
     subTitle: {
         padding: 10,
