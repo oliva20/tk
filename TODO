@@ -12,9 +12,5 @@
 [ ] Refactor the infoWindow for better aesthetics. It also does not include all the 
     possible transports.
 
-[ ] The main screen is not rounding the co2 result.
-
-NOTES** 
--> There is an issue with the callout of mapview. So the only soluion is to use
-a modal to ask the user for the type of transport. 
+[x] The main screen is not rounding the co2 result.
  

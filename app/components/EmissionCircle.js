@@ -1,8 +1,7 @@
 import React from 'react';
-
+import PropTypes from 'prop-types';
 import {
     Text, 
-    Image, 
     View, 
     StyleSheet,
 } from 'react-native';
@@ -40,5 +39,9 @@ const styles = StyleSheet.create({
         fontWeight: 'bold',
     }
 });
+
+EmissionCircle.propTypes = {
+    emissionNumber: PropTypes.float
+}
 
 export default EmissionCircle;
