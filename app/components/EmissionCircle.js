@@ -41,7 +41,7 @@ const styles = StyleSheet.create({
 });
 
 EmissionCircle.propTypes = {
-    emissionNumber: PropTypes.float
+    emissionNumber: PropTypes.number
 }
 
 export default EmissionCircle;
