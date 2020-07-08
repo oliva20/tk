@@ -13,4 +13,15 @@
     possible transports.
 
 [x] The main screen is not rounding the co2 result.
+<<<<<<< HEAD
+=======
+
+[ ] Create an introduction splash screen.
+
+[ ] Add a permission check for the location.
+
+NOTES** 
+-> There is an issue with the callout of mapview. So the only soluion is to use
+a modal to ask the user for the type of transport. 
+>>>>>>> 558a6a89e152e050a33a463f2f7100394962b937
  
