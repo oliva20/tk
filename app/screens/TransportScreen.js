@@ -38,12 +38,6 @@ var transportList = [Object.keys(transport).map(function(key){
     return key;
 })];
 
-function updateMarker(m, markers, s, r) {
-    markers.forEach(item => { 
-        if(item.id === m.id)
-            item.type = transportList[s][r]; 
-    });
-}
 
 export default class TansportScreen extends React.Component { 
     
@@ -67,7 +61,14 @@ export default class TansportScreen extends React.Component {
         ); 
     }
 
-    //this is how to do an async arrow function xxx = async () => {} 
+    updateMarker = (m, markers, s, r) => {
+        markers.forEach(item => { 
+            if(item.id === m.id)
+                item.type = transportList[s][r]; 
+        });
+    }
+    
+    //TODO use a strings file for translation.
     calculate = () => {
         if(this.state.markers.length == 0)
             Alert.alert('Oops! No Route Detected', 'Please start tracking your coordinates and change the mode of transport by pressing each marker.',
@@ -160,7 +161,7 @@ export default class TansportScreen extends React.Component {
                                                     //find the matching marker and change
                                                     //the type property.
                                                     (selection, row) => 
-                                                        updateMarker(marker,
+                                                        this.updateMarker(marker,
                                                                     this.state.markers,
                                                                     selection,
                                                                     row)
