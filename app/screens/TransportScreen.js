@@ -28,6 +28,7 @@ const GEOLOCATION_OPTIONS = {
     timeInterval: 3000, 
 }; 
 
+//TODO The save ICON could have a small popup hint to tell the user to use it to save the generate the emissions from the current route.
 const SAVE_ICON = { url: '../assets/save.png' };
 
 const MARKER_INTERVAL = 10; //every x coordinates register a marker NOTE: We might want to increase this value in the future
@@ -61,10 +62,11 @@ export default class TansportScreen extends React.Component {
         ); 
     }
 
-    updateMarker = (m, markers, s, r) => {
+    updateMarker = (marker, markers, selection, row) => {
+        //using ids to find the matching markers. 
         markers.forEach(item => { 
-            if(item.id === m.id)
-                item.type = transportList[s][r]; 
+            if(item.id === marker.id)
+                item.type = transportList[selection][row]; 
         });
     }
     
@@ -251,7 +253,6 @@ const styles = StyleSheet.create({
     },
     infoWindow: {
         width: Dimensions.get('window').width / 2,
-        height: Dimensions.get('window').height / 3,
     },
     saveView: {
         position: 'absolute',

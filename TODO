@@ -5,17 +5,20 @@
 
 [x] Create a manager to calculate the emissions from transports;
 
-[ ] Look into migrating the project to TypeScript;
+[x] Look into migrating the project to TypeScript;
+    - It would be easy but haven't got the time atm.
 
 [ ] Fix the warning on every child should have props key;
 
 [ ] Refactor the infoWindow for better aesthetics. It also does not include all the 
     possible transports.
+    -> We need to display all the available modes of transport. Now all this won't fit inside a 
+    custom marker window so the only solution would be to use a modal. 
+        - The modal shows once the user presses the marker.
+        - Then there is a picker for the user to choose the transport.
+        - A button to close is displayed at the button or a simple 'X' in the corner.
 
 [x] The main screen is not rounding the co2 result.
-<<<<<<< HEAD
-=======
-
 [ ] Create an introduction splash screen.
 
 [ ] Add a permission check for the location.
@@ -23,5 +26,4 @@
 NOTES** 
 -> There is an issue with the callout of mapview. So the only soluion is to use
 a modal to ask the user for the type of transport. 
->>>>>>> 558a6a89e152e050a33a463f2f7100394962b937
  
