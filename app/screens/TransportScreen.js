@@ -172,7 +172,7 @@ export default class TansportScreen extends React.Component {
                             </MapView.Marker>
                         ))
                     }
-                    
+     
                 </MapView> 
 
                     <TouchableOpacity

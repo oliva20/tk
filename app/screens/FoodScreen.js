@@ -2,7 +2,6 @@ import React from 'react';
 import { food } from 'carbon-footprint'; 
 import {
     Text, 
-    SafeAreaView,
     View,
     StyleSheet,
     Slider,

@@ -3,7 +3,6 @@ import { useIsFocused } from '@react-navigation/native';
 import {
     Text, 
     Image, 
-    SafeAreaView, 
     View,
     StyleSheet,
 } from 'react-native';
